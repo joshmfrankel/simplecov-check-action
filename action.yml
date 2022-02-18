@@ -9,7 +9,7 @@ inputs:
   minimum_coverage:
     description: 'Percentage required to pass'
     required: true
-    default: "90"
+    default: 90
 runs:
   using: 'docker'
   image: 'Dockerfile'

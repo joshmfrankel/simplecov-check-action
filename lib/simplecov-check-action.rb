@@ -6,7 +6,7 @@ Dir["./simplecov-check-action/*.rb"].each { |file| require file }
 parsed_coverage = JSON.parse(File.read(ENV["INPUT_COVERAGE_PATH"]))
 metrics = parsed_coverage["metrics"]
 
-if metrics["covered_percent"] >= ENV["INPUT_MINIMUM_COVERAGE"]
+if metrics["covered_percent"] >= Float(ENV["INPUT_MINIMUM_COVERAGE"])
   $stdout.puts("PASSED - Coverage Analysis")
   $stdout.puts("=================================================")
   $stdout.puts("Covered: #{metrics["covered_percent"].round(2)}%")
