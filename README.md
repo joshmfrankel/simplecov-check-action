@@ -1,0 +1,1 @@
+# simplecov-check-action
