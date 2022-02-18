@@ -1,0 +1,15 @@
+name: 'SimpleCov Check Action'
+description: 'Enabling SimpleCov support for Github Actions'
+author: 'Josh Frankel'
+inputs:
+  coverage_path:
+    description: 'File path to coverage results'
+    required: true
+    default: "coverage/coverage.json"
+  minimum_coverage:
+    description: 'Percentage required to pass'
+    required: true
+    default: "90"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
