@@ -2,7 +2,7 @@ name: 'SimpleCov Check Action'
 description: 'Enabling SimpleCov support for Github Actions'
 author: 'Josh Frankel'
 inputs:
-  token:
+  github_token:
     description: "Github token for create checks"
     required: true
   coverage_path:

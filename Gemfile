@@ -11,5 +11,6 @@ group :test do
   gem "pry-nav"
   gem "rspec"
   gem "webmock"
-  gem "climate_control"
+  gem "simplecov"
+  gem "simplecov-json"
 end
