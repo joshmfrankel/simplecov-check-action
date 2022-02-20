@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "./coverage/check_action"
-require "./coverage/coverage_results"
-require "./coverage/coverage_reporter"
+require_relative "./coverage/check_action"
+require_relative "./coverage/coverage_results"
+require_relative "./coverage/coverage_reporter"
 
 CheckAction.new(
   coverage_path: ENV["INPUT_COVERAGE_PATH"],
