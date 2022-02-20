@@ -12,8 +12,8 @@ require "net/http"
 require "webmock/rspec"
 require "json"
 require "pry"
+require "time"
 
 Dir["./lib/coverage/**/*.rb"].each do |file|
   require file
 end
-require_relative "../lib/request"

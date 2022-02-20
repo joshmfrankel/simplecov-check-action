@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CheckAction
-  def initialize(coverage_path:, minimum_coverage:, github_token:, sha:)
+  def initialize(coverage_path:, minimum_coverage:, github_token:, sha: nil)
     @coverage_path = coverage_path
     @minimum_coverage = minimum_coverage
     @github_token = github_token
@@ -18,6 +18,9 @@ class CheckAction
     request = Request.new(access_token: @github_token)
       .post(uri: endpoint, body: body)
     puts request
+    puts request.body
+    puts request.value
+    puts resquest.inspect
 
     CoverageReporter.new(coverage_results: coverage_results).call
   end

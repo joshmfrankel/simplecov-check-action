@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "net/http"
+
 class Request
   def initialize(access_token:)
     @access_token = access_token

@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem "octokit", "~> 4.0"
+
 group :development do
   gem "rubocop"
 end
