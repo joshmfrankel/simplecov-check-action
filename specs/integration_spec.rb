@@ -9,8 +9,12 @@ describe "Integration test" do
     # Silence stdout
     expect($stdout).to receive(:write).at_least(:once)
     mock_request = instance_double(Request)
+    mock_response = double
     expect(Request).to receive(:new).and_return(mock_request)
-    expect(mock_request).to receive(:post).and_return("stuff")
+    expect(mock_response).to receive(:body)
+    expect(mock_response).to receive(:value)
+    expect(mock_response).to receive(:inspect)
+    expect(mock_request).to receive(:post).and_return(mock_response)
 
     action = CheckAction.new(
       coverage_path: "specs/fakes/fake_coverage.json",
@@ -28,8 +32,12 @@ describe "Integration test" do
     # Silence stdout
     expect($stdout).to receive(:write).at_least(:once)
     mock_request = instance_double(Request)
+    mock_response = double
+    expect(mock_response).to receive(:body)
+    expect(mock_response).to receive(:value)
+    expect(mock_response).to receive(:inspect)
     expect(Request).to receive(:new).and_return(mock_request)
-    expect(mock_request).to receive(:post).and_return("stuff")
+    expect(mock_request).to receive(:post).and_return(mock_response)
 
     action = CheckAction.new(
       coverage_path: "specs/fakes/fake_coverage.json",
