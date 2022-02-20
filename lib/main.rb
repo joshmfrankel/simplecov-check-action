@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+require "json"
+require "octokit"
+client = Octokit::Client.new(access_token: ENV["INPUT_GITHUB_TOKEN"])
+puts client.api_endpoint
+puts client.user
 require_relative "./coverage/check_action"
 require_relative "./coverage/coverage_results"
 require_relative "./coverage/coverage_reporter"

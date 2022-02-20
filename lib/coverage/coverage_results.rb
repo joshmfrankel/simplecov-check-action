@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "json"
-
 # CoverageResults is a Value object for interacting with SimpleCov results
 class CoverageResults
   attr_reader :minimum_coverage

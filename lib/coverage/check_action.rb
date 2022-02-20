@@ -14,7 +14,9 @@ class CheckAction
     )
 
     # Testing status post
-    # client = Octokit::Client.new(:access_token => 'personal_access_token')
+    client = Octokit::Client.new(access_token: @github_token)
+    puts client.api_endpoint
+    puts client.user
 
     CoverageReporter.new(coverage_results: coverage_results).call
   end
