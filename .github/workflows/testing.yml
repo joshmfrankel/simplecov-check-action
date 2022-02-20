@@ -1,0 +1,53 @@
+# We can dogfood the Github action but using it within our own Github action
+# for this repository
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - main
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler: default
+          bundler-cache: true
+
+      - name: Run tests
+        run: |
+          bundle exec rspec specs/
+
+      - name: Upload coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: coverage
+
+  coverage:
+    runs-on: ubuntu-latest
+    needs: rspec
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download coverage results
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage-report
+          path: coverage
+
+      # Using the current repo to perform coverage analysis
+      - uses: joshmfrankel/simplecov-check-action@main
+        with:
+          coverage_path: coverage/coverage.json
+          minimum_coverage: 90
+          github_token: ${{ secrets.GITHUB_TOKEN }}
