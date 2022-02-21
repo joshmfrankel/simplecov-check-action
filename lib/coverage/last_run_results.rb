@@ -6,9 +6,7 @@ class LastRunResults
     @minimum_coverage = Float(minimum_coverage)
     @minimum_coverage_type = minimum_coverage_type
 
-    puts @results
-
-    raise "#{coverage_path} does not contain `#{minimum_coverage_type}` key" unless result.has_key?(@minimum_coverage_type)
+    raise "#{coverage_path} does not contain `#{minimum_coverage_type}` key" unless !result.nil? && result.key?(@minimum_coverage_type)
   end
 
   def passed?

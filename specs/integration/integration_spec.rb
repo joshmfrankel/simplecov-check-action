@@ -7,8 +7,7 @@ describe "Check Action integration" do
   let(:check_run_id) { 1 }
   let(:sha) { "foobarbaz" }
   let(:the_time) { "2022-02-21T09:51:57-05:00" }
-  let(:owner) { "robswire" }
-  let(:repo) { "immersion" }
+  let(:repo) { "robswire/immersion" }
 
   context "for coverage type line" do
     it "raises RuntimeError when coverage file doesn't contain `line` key" do
@@ -20,7 +19,6 @@ describe "Check Action integration" do
         minimum_coverage_type: "line",
         github_token: github_token,
         sha: sha,
-        owner: owner,
         repo: repo
       )
 
@@ -35,11 +33,11 @@ describe "Check Action integration" do
       expect(mock_time).to receive(:iso8601).and_return(the_time).twice
       minimum_coverage = 100
 
-      stub_request(:post, "https://api.github.com/repos/#{owner}/#{repo}/check-runs")
+      stub_request(:post, "https://api.github.com/repos/#{repo}/check-runs")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "in_progress", started_at: the_time })
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
-      stub_request(:patch, "https://api.github.com/repos/#{owner}/#{repo}/check-runs/#{check_run_id}")
+      stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "Coverage Results", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
@@ -48,7 +46,6 @@ describe "Check Action integration" do
         minimum_coverage_type: "line",
         github_token: github_token,
         sha: sha,
-        owner: owner,
         repo: repo
       )
 
@@ -61,11 +58,11 @@ describe "Check Action integration" do
       expect(mock_time).to receive(:iso8601).and_return(the_time).twice
       minimum_coverage = 80
 
-      stub_request(:post, "https://api.github.com/repos/#{owner}/#{repo}/check-runs")
+      stub_request(:post, "https://api.github.com/repos/#{repo}/check-runs")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "in_progress", started_at: the_time })
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
-      stub_request(:patch, "https://api.github.com/repos/#{owner}/#{repo}/check-runs/#{check_run_id}")
+      stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "success", output: { title: "Coverage Results", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
@@ -74,7 +71,6 @@ describe "Check Action integration" do
         minimum_coverage_type: "line",
         github_token: github_token,
         sha: sha,
-        owner: owner,
         repo: repo
       )
 
@@ -92,7 +88,6 @@ describe "Check Action integration" do
         minimum_coverage_type: "branch",
         github_token: github_token,
         sha: sha,
-        owner: owner,
         repo: repo
       )
 
@@ -107,11 +102,11 @@ describe "Check Action integration" do
       expect(mock_time).to receive(:iso8601).and_return(the_time).twice
       minimum_coverage = 100
 
-      stub_request(:post, "https://api.github.com/repos/#{owner}/#{repo}/check-runs")
+      stub_request(:post, "https://api.github.com/repos/#{repo}/check-runs")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "in_progress", started_at: the_time })
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
-      stub_request(:patch, "https://api.github.com/repos/#{owner}/#{repo}/check-runs/#{check_run_id}")
+      stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "Coverage Results", summary: "* 75.0% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
@@ -120,7 +115,6 @@ describe "Check Action integration" do
         minimum_coverage_type: "branch",
         github_token: github_token,
         sha: sha,
-        owner: owner,
         repo: repo
       )
 
@@ -133,11 +127,11 @@ describe "Check Action integration" do
       expect(mock_time).to receive(:iso8601).and_return(the_time).twice
       minimum_coverage = 70
 
-      stub_request(:post, "https://api.github.com/repos/#{owner}/#{repo}/check-runs")
+      stub_request(:post, "https://api.github.com/repos/#{repo}/check-runs")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "in_progress", started_at: the_time })
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
-      stub_request(:patch, "https://api.github.com/repos/#{owner}/#{repo}/check-runs/#{check_run_id}")
+      stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
         .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "success", output: { title: "Coverage Results", summary: "* 75.0% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
@@ -146,7 +140,6 @@ describe "Check Action integration" do
         minimum_coverage_type: "branch",
         github_token: github_token,
         sha: sha,
-        owner: owner,
         repo: repo
       )
 

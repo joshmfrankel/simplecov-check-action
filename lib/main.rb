@@ -16,8 +16,7 @@ CheckAction.new(
 
   # Github defined EnvVars
   sha: ENV["GITHUB_SHA"],
-  owner: ENV["GITHUB_REPOSITORY_OWNER"],
-  repo: ENV["GITHUB_REPOSITORY_NAME"]
+  repo: ENV["GITHUB_REPOSITORY"]
 ).call
 
 # TODO

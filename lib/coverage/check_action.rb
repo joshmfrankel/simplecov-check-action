@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class CheckAction
-  def initialize(coverage_path:, minimum_coverage:, minimum_coverage_type:, github_token:, sha:, owner:, repo:)
+  def initialize(coverage_path:, minimum_coverage:, minimum_coverage_type:, github_token:, sha:, repo:)
     @coverage_path = coverage_path
     @minimum_coverage = minimum_coverage
     @minimum_coverage_type = minimum_coverage_type
     @github_token = github_token
     @sha = sha
-    @owner = owner
     @repo = repo
   end
 
@@ -20,16 +19,16 @@ class CheckAction
 
     # Create Check Run
     request_object = Request.new(access_token: @github_token)
-    request = request_object.post(uri: endpoint(owner: @owner, repo: @repo), body: body)
+    request = request_object.post(uri: endpoint(repo: @repo), body: body)
 
     check_run_id = JSON.parse(request.body)["id"]
 
     # End Check Run
-    request_object.patch(uri: "#{endpoint(owner: @owner, repo: @repo)}/#{check_run_id}", body: ending_payload(coverage_results: coverage_results))
+    request_object.patch(uri: "#{endpoint(repo: @repo)}/#{check_run_id}", body: ending_payload(coverage_results: coverage_results))
   end
 
-  def endpoint(owner:, repo:)
-    "https://api.github.com/repos/#{owner}/#{repo}/check-runs"
+  def endpoint(repo:)
+    "https://api.github.com/repos/#{repo}/check-runs"
   end
 
   def body
