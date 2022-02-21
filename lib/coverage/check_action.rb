@@ -21,7 +21,7 @@ class CheckAction
     check_run_id = JSON.parse(request.body)["id"]
 
     # End Check Run
-    request_object.patch(uri: "#{endpoint}/#{check_run_id}", body: ending_payload)
+    request_object.patch(uri: "#{endpoint}/#{check_run_id}", body: ending_payload(coverage_results: coverage_results))
   end
 
   def endpoint
@@ -33,23 +33,28 @@ class CheckAction
 
   def body
     {
-      name: "SimpleCov Results",
+      name: "Coverage Results",
       head_sha: @sha,
       status: "in_progress",
       started_at: Time.now.iso8601
     }
   end
 
-  def ending_payload
+  def ending_payload(coverage_results:)
+    conclusion = coverage_results.passed? ? "success" : "failure"
+    summary = <<~SUMMARY
+      * #{coverage_results.covered_percent}% covered
+      * #{coverage_results.minimum_coverage}% minimum
+    SUMMARY
     {
-      name: "SimpleCov Results",
+      name: "Coverage Results",
       head_sha: @sha,
       status: "completed",
       completed_at: Time.now.iso8601,
-      conclusion: "success",
+      conclusion: conclusion,
       output: {
-        title: "SimpleCov Results",
-        summary: "The summary",
+        title: "Coverage Results",
+        summary: summary,
         text: "The text",
         annotations: []
       }
