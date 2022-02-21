@@ -1,33 +1,34 @@
 # frozen_string_literal: true
 
 class CheckAction
-  def initialize(coverage_path:, minimum_coverage:, github_token:, sha:)
+  def initialize(coverage_path:, minimum_coverage:, minimum_coverage_type:, github_token:, sha:, owner:, repo:)
     @coverage_path = coverage_path
     @minimum_coverage = minimum_coverage
+    @minimum_coverage_type = minimum_coverage_type
     @github_token = github_token
     @sha = sha
+    @owner = owner
+    @repo = repo
   end
 
   def call
-    coverage_results = CoverageResults.new(
+    coverage_results = LastRunResults.new(
       coverage_path: @coverage_path,
-      minimum_coverage: @minimum_coverage
+      minimum_coverage: @minimum_coverage,
+      minimum_coverage_type: @minimum_coverage_type
     )
 
     # Create Check Run
     request_object = Request.new(access_token: @github_token)
-    request = request_object.post(uri: endpoint, body: body)
+    request = request_object.post(uri: endpoint(owner: @owner, repo: @repo), body: body)
 
     check_run_id = JSON.parse(request.body)["id"]
 
     # End Check Run
-    request_object.patch(uri: "#{endpoint}/#{check_run_id}", body: ending_payload(coverage_results: coverage_results))
+    request_object.patch(uri: "#{endpoint(owner: @owner, repo: @repo)}/#{check_run_id}", body: ending_payload(coverage_results: coverage_results))
   end
 
-  def endpoint
-    owner = "joshmfrankel"
-    repo = "simplecov-check-action"
-
+  def endpoint(owner:, repo:)
     "https://api.github.com/repos/#{owner}/#{repo}/check-runs"
   end
 
@@ -44,8 +45,14 @@ class CheckAction
     conclusion = coverage_results.passed? ? "success" : "failure"
     summary = <<~SUMMARY
       * #{coverage_results.covered_percent}% covered
-      * #{coverage_results.minimum_coverage}% minimum
+      * #{@minimum_coverage}% minimum
     SUMMARY
+
+    # # TODO: Loop results
+    # text = <<~TEXT
+    #   | File | Coverage |
+    #   | ---- | -------- |
+    # TEXT
     {
       name: "Coverage Results",
       head_sha: @sha,

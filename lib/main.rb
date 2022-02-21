@@ -5,14 +5,21 @@ require "json"
 require "time"
 require_relative "./coverage/request"
 require_relative "./coverage/check_action"
-require_relative "./coverage/coverage_results"
+require_relative "./coverage/last_run_results"
 
 CheckAction.new(
   # User-defined inputs
   coverage_path: ENV["INPUT_COVERAGE_PATH"],
   minimum_coverage: ENV["INPUT_MINIMUM_COVERAGE"],
+  minimum_coverage_type: ENV["INPUT_MINIMUM_COVERAGE_TYPE"],
   github_token: ENV["INPUT_GITHUB_TOKEN"],
 
   # Github defined EnvVars
-  sha: ENV["GITHUB_SHA"]
+  sha: ENV["GITHUB_SHA"],
+  owner: ENV["GITHUB_REPOSITORY_OWNER"],
+  repo: ENV["GITHUB_REPOSITORY_NAME"]
 ).call
+
+# TODO
+# * Toggle whether it should fail based on minimum
+# * Allow custom format?

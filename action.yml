@@ -7,10 +7,13 @@ inputs:
     required: true
   coverage_path:
     description: 'File path to coverage results'
-    default: "coverage/coverage.json"
+    default: "coverage/.last_run.json"
   minimum_coverage:
     description: 'Percentage required to pass'
     default: 90
+  minimum_coverage_type:
+    description: 'The type of coverage: line or branch'
+    default: "line"
 runs:
   using: 'docker'
   image: 'Dockerfile'
