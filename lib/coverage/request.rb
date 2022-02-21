@@ -13,7 +13,23 @@ class Request
       request["Content-Type"] = "application/json"
       request["Accept"] = "application/vnd.github.antiope-preview+json"
       request["Authorization"] = "Bearer #{@access_token}"
-      request["User-Agent"] = "Coverage"
+      request["User-Agent"] = "ruby"
+
+      request.body = body.to_json
+    end
+
+    Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request_object)
+    end
+  end
+
+  def patch(uri:, body:)
+    uri = URI.parse(uri)
+    request_object = Net::HTTP::Patch.new(uri).tap do |request|
+      request["Content-Type"] = "application/json"
+      request["Accept"] = "application/vnd.github.antiope-preview+json"
+      request["Authorization"] = "Bearer #{@access_token}"
+      request["User-Agent"] = "ruby"
 
       request.body = body.to_json
     end

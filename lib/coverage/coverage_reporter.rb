@@ -8,20 +8,24 @@ class CoverageReporter
   def call
     $stdout.puts("=================================================")
     if @coverage_results.passed?
-      $stdout.puts("PASSED - Coverage Analysis")
-      $stdout.puts("=================================================")
-      $stdout.puts("Covered: #{@coverage_results.covered_percent}%")
-      $stdout.puts("Minimum: #{@coverage_results.minimum_coverage}%")
-      $stdout.puts("Lines: #{@coverage_results.covered_lines}")
-      $stdout.puts("Total: #{@coverage_results.total_lines}")
+      $stdout.puts <<~OUTPUT
+        PASSED - Coverage Analysis
+        =================================================
+        Covered: #{@coverage_results.covered_percent}%
+        Minimum: #{@coverage_results.minimum_coverage}%
+        Lines: #{@coverage_results.covered_lines}
+        Total: #{@coverage_results.total_lines}
+      OUTPUT
       exit(0)
     else
-      $stdout.puts("FAILED - Coverage Analysis")
-      $stdout.puts("=================================================")
-      $stdout.puts("Covered: #{@coverage_results.covered_percent}%")
-      $stdout.puts("Minimum: #{@coverage_results.minimum_coverage}%")
-      $stdout.puts("Lines: #{@coverage_results.covered_lines}")
-      $stdout.puts("Total: #{@coverage_results.total_lines}")
+      $stdout.puts <<~OUTPUT
+        FAILED - Coverage Analysis
+        =================================================
+        Covered: #{@coverage_results.covered_percent}%
+        Minimum: #{@coverage_results.minimum_coverage}%
+        Lines: #{@coverage_results.covered_lines}
+        Total: #{@coverage_results.total_lines}
+      OUTPUT
       exit(1)
     end
   end

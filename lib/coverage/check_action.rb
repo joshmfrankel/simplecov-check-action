@@ -14,16 +14,30 @@ class CheckAction
       minimum_coverage: @minimum_coverage
     )
 
-    # Testing status post
-    request = Request.new(access_token: @github_token)
-      .post(uri: endpoint, body: body)
+    # Create Check Run
+    request_object = Request.new(access_token: @github_token)
+    request = request_object.post(uri: endpoint, body: body)
 
-    # Debug
-    puts request.body
-    puts request.value
-    puts request.inspect
+    check_run_id = JSON.parse(request.body)["id"]
 
-    CoverageReporter.new(coverage_results: coverage_results).call
+    puts check_run_id
+    puts JSON.parse(request.body)
+
+    if request.code.to_i >= 300
+      raise "#{request.message}: #{request.body}"
+    end
+
+    puts "Ending run"
+
+    # End Check Run
+    puts "#{endpoint}/#{check_run_id}"
+    response = request_object.patch(uri: "#{endpoint}/#{check_run_id}", body: ending_payload)
+
+    puts response.code
+    if response.code.to_i >= 300
+      puts JSON.parse(response.body)
+      raise "#{response.message}: #{response.body}"
+    end
   end
 
   def endpoint
@@ -35,10 +49,26 @@ class CheckAction
 
   def body
     {
-      name: "Coverage",
+      name: "SimpleCov Results",
       head_sha: @sha,
       status: "in_progress",
       started_at: Time.now.iso8601
+    }
+  end
+
+  def ending_payload
+    {
+      name: "SimpleCov Results",
+      head_sha: @sha,
+      status: "completed",
+      completed_at: Time.now.iso8601,
+      conclusion: "success",
+      output: {
+        title: "SimpleCov Results",
+        summary: "The summary",
+        text: "The text",
+        annotations: []
+      }
     }
   end
 end
