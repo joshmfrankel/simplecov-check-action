@@ -20,24 +20,8 @@ class CheckAction
 
     check_run_id = JSON.parse(request.body)["id"]
 
-    puts check_run_id
-    puts JSON.parse(request.body)
-
-    if request.code.to_i >= 300
-      raise "#{request.message}: #{request.body}"
-    end
-
-    puts "Ending run"
-
     # End Check Run
-    puts "#{endpoint}/#{check_run_id}"
-    response = request_object.patch(uri: "#{endpoint}/#{check_run_id}", body: ending_payload)
-
-    puts response.code
-    if response.code.to_i >= 300
-      puts JSON.parse(response.body)
-      raise "#{response.message}: #{response.body}"
-    end
+    request_object.patch(uri: "#{endpoint}/#{check_run_id}", body: ending_payload)
   end
 
   def endpoint
