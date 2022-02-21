@@ -38,7 +38,7 @@ describe "Check Action integration" do
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
       stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
-        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "Coverage Results", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
+        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "Coverage Results", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum (by line)\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
         coverage_path: "specs/fakes/fake_last_run.json",
@@ -63,7 +63,7 @@ describe "Check Action integration" do
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
       stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
-        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "success", output: { title: "Coverage Results", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
+        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "success", output: { title: "Coverage Results", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum (by line)\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
         coverage_path: "specs/fakes/fake_last_run.json",
@@ -107,7 +107,7 @@ describe "Check Action integration" do
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
       stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
-        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "Coverage Results", summary: "* 75.0% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
+        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "Coverage Results", summary: "* 75.0% covered\n" + "* #{minimum_coverage}% minimum (by branch)\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
         coverage_path: "specs/fakes/fake_last_run.json",
@@ -132,7 +132,7 @@ describe "Check Action integration" do
         .to_return(body: { id: check_run_id }.to_json, status: 201)
 
       stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
-        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "success", output: { title: "Coverage Results", summary: "* 75.0% covered\n" + "* #{minimum_coverage}% minimum\n", text: "The text", annotations: [] } })
+        .with(body: { name: "Coverage Results", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "success", output: { title: "Coverage Results", summary: "* 75.0% covered\n" + "* #{minimum_coverage}% minimum (by branch)\n", text: "The text", annotations: [] } })
 
       action = CheckAction.new(
         coverage_path: "specs/fakes/fake_last_run.json",

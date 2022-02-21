@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class CheckAction
-  def initialize(coverage_path:, minimum_coverage:, minimum_coverage_type:, github_token:, sha:, repo:)
+  def initialize(coverage_path:, minimum_coverage:, minimum_coverage_type:, github_token:, sha:, repo:, debug: false)
     @coverage_path = coverage_path
     @minimum_coverage = minimum_coverage
     @minimum_coverage_type = minimum_coverage_type
     @github_token = github_token
     @sha = sha
     @repo = repo
+    @debug = debug
   end
 
   def call
@@ -18,7 +19,7 @@ class CheckAction
     )
 
     # Create Check Run
-    request_object = Request.new(access_token: @github_token)
+    request_object = Request.new(access_token: @github_token, debug: @debug)
     request = request_object.post(uri: endpoint(repo: @repo), body: body)
 
     check_run_id = JSON.parse(request.body)["id"]
@@ -44,14 +45,14 @@ class CheckAction
     conclusion = coverage_results.passed? ? "success" : "failure"
     summary = <<~SUMMARY
       * #{coverage_results.covered_percent}% covered
-      * #{@minimum_coverage}% minimum
+      * #{@minimum_coverage}% minimum (by #{@minimum_coverage_type})
     SUMMARY
 
     # # TODO: Loop results
-    # text = <<~TEXT
-    #   | File | Coverage |
-    #   | ---- | -------- |
-    # TEXT
+    text = <<~TEXT
+      | File | Coverage |
+      | ---- | -------- |
+    TEXT
     {
       name: "Coverage Results",
       head_sha: @sha,

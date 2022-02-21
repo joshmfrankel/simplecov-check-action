@@ -3,8 +3,9 @@
 require "net/http"
 
 class Request
-  def initialize(access_token:)
+  def initialize(access_token:, debug:)
     @access_token = access_token
+    @debug = debug
   end
 
   def post(uri:, body:)
@@ -34,6 +35,10 @@ class Request
 
     if response.code.to_i >= 300
       raise "#{response.message}: #{response.body}"
+    end
+
+    if @debug
+      $stdout.puts "#{response.message}: #{response.body}"
     end
 
     response

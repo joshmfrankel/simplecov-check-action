@@ -13,6 +13,7 @@ CheckAction.new(
   minimum_coverage: ENV["INPUT_MINIMUM_COVERAGE"],
   minimum_coverage_type: ENV["INPUT_MINIMUM_COVERAGE_TYPE"],
   github_token: ENV["INPUT_GITHUB_TOKEN"],
+  debug: ENV["INPUT_DEBUG"],
 
   # Github defined EnvVars
   sha: ENV["GITHUB_SHA"],
