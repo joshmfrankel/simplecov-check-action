@@ -5,9 +5,6 @@ inputs:
   github_token:
     description: "Github token for create checks"
     required: true
-  sha:
-    description: 'The current commit sha'
-    required: true
   coverage_path:
     description: 'File path to coverage results'
     default: "coverage/.last_run.json"
