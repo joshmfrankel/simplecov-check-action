@@ -31,4 +31,3 @@ jobs:
         with:
           minimum_coverage: 90
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          sha: ${{ github.event.pull_request.head.sha }}

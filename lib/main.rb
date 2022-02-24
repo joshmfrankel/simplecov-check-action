@@ -7,13 +7,13 @@ require_relative "./coverage/request"
 require_relative "./coverage/check_action"
 require_relative "./coverage/last_run_results"
 
-puts "OUTPUT"
-puts ENV["INPUT_SHA"]
-puts "===================="
-puts ENV["GITHUB_SHA"]
-puts "===================="
-puts JSON.parse(File.read(ENV["GITHUB_EVENT_PATH"]))
-puts "END"
+json = JSON.parse(File.read(ENV["GITHUB_EVENT_PATH"]))
+pull_request_sha = json.dig("pull_request", "head", "sha")
+
+# Push events set the GITHUB_SHA to the commit at the tip of HEAD
+# Pull Request events set GITHUB_SHA to the merge commit which is invalid. Therefore
+# we utilize the event data provided by Github to retrieve the pull requests sha.
+sha = pull_request_sha.nil? ? ENV["GITHUB_SHA"] : pull_request_sha
 
 CheckAction.new(
   # User-defined inputs
@@ -24,10 +24,6 @@ CheckAction.new(
   debug: ENV["INPUT_DEBUG"],
 
   # Github defined EnvVars
-  sha: ENV["GITHUB_SHA"],
+  sha: sha,
   repo: ENV["GITHUB_REPOSITORY"]
 ).call
-
-# TODO
-# * Toggle whether it should fail based on minimum
-# * Allow custom format?
