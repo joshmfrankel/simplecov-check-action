@@ -8,13 +8,23 @@ require_relative "./coverage/check_action"
 require_relative "./coverage/last_run_results"
 
 json = JSON.parse(File.read(ENV["GITHUB_EVENT_PATH"]))
+pull_request_sha = json.dig("pull_request", "head", "sha")
 puts "OUTPUT"
-puts ENV["INPUT_SHA"]
-puts "===================="
 puts ENV["GITHUB_SHA"]
 puts "===================="
-puts json.dig("pull_request", "head", "sha")
+puts json
+puts "===================="
+puts json["pull_request"]
+puts "===================="
+puts json["pull_request"]["head"]
+puts "===================="
+puts json["pull_request"]["head"]["sha"]
+puts "===================="
+puts pull_request_sha
+puts "===================="
 puts "END"
+
+sha = pull_request_sha.nil? ? ENV["GITHUB_SHA"] : pull_request_sha
 
 CheckAction.new(
   # User-defined inputs
@@ -25,7 +35,7 @@ CheckAction.new(
   debug: ENV["INPUT_DEBUG"],
 
   # Github defined EnvVars
-  sha: ENV["GITHUB_SHA"],
+  sha: sha,
   repo: ENV["GITHUB_REPOSITORY"]
 ).call
 
