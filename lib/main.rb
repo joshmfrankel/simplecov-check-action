@@ -7,6 +7,14 @@ require_relative "./coverage/request"
 require_relative "./coverage/check_action"
 require_relative "./coverage/last_run_results"
 
+puts "OUTPUT"
+puts ENV["INPUT_SHA"]
+puts "===================="
+puts ENV["GITHUB_SHA"]
+puts "===================="
+puts JSON.parse(File.read(ENV["GITHUB_EVENT_PATH"]))
+puts "END"
+
 CheckAction.new(
   # User-defined inputs
   coverage_path: ENV["INPUT_COVERAGE_PATH"],
