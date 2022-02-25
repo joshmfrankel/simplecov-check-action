@@ -34,7 +34,7 @@ class CheckAction
 
   def body
     {
-      name: "Coverage Results",
+      name: "SimpleCov",
       head_sha: @sha,
       status: "in_progress",
       started_at: Time.now.iso8601
@@ -54,13 +54,13 @@ class CheckAction
       | ---- | -------- |
     TEXT
     {
-      name: "Coverage Results",
+      name: "SimpleCov",
       head_sha: @sha,
       status: "completed",
       completed_at: Time.now.iso8601,
       conclusion: conclusion,
       output: {
-        title: "Coverage Results",
+        title: "#{coverage_results.covered_percent}% covered (minimum #{@minimum_coverage}%)",
         summary: summary,
         text: "The text",
         annotations: []

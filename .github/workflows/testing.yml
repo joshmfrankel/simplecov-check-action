@@ -1,6 +1,6 @@
 # We can dogfood the Github action but using it within our own Github action
 # for this repository
-name: Tests
+name: Testing
 
 on:
   pull_request:
