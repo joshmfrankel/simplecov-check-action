@@ -11,6 +11,9 @@ inputs:
   coverage_path:
     description: 'File path to coverage results'
     default: "coverage/.last_run.json"
+  coverage_json_path:
+    description: 'File path to simplecov-json coverage results (only when using simplecov-json)'
+    default: "coverage/coverage.json"
   minimum_coverage:
     description: 'Percentage required to pass'
     default: 90

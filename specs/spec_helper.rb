@@ -8,11 +8,6 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
 ])
 SimpleCov.start do
   enable_coverage :branch
-  # SimpleCov.minimum_coverage 90
-  # SimpleCov.minimum_coverage_by_file 80
-  # add_group "Low coverage" do |source_file|
-  #   source_file.covered_percent < 90
-  # end
 end
 
 require "net/http"
@@ -20,7 +15,13 @@ require "webmock/rspec"
 require "json"
 require "pry"
 require "time"
+require "climate_control"
 
-require_relative "../lib/coverage/request"
 require_relative "../lib/coverage/check_action"
-require_relative "../lib/coverage/last_run_results"
+require_relative "../lib/coverage/request"
+require_relative "../lib/coverage/retrieve_commit_sha"
+require_relative "../lib/coverage/adapters/github_end_check_payload"
+require_relative "../lib/coverage/adapters/simple_cov_result"
+require_relative "../lib/coverage/adapters/simple_cov_json_result"
+require_relative "../lib/coverage/formatters/start_check_run"
+require_relative "../lib/coverage/formatters/end_check_run"
