@@ -20,11 +20,11 @@ if ENV["INPUT_DEBUG"]
     === START SHA DEBUG ===
     #{json}
     =======================
-    #{pull_request_sha}
+    PR Sha: #{pull_request_sha}
     =======================
-    #{ENV["GITHUB_SHA"]}
+    ENV[GITHUB_SHA]: #{ENV["GITHUB_SHA"]}
     =======================
-    #{sha}
+    Selected Sha: #{sha}
     === END SHA DEBUG ===
   SHA_DEBUG
 end

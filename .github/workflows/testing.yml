@@ -27,7 +27,8 @@ jobs:
           bundle exec rspec specs/
 
       # Using the current repo to perform coverage analysis
-      - uses: joshmfrankel/simplecov-check-action@main
+      - uses: joshmfrankel/simplecov-check-action@pr-test-3
         with:
           minimum_coverage: 90
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          debug: true
