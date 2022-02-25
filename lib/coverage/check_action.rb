@@ -63,10 +63,11 @@ class CheckAction
 
   def build_detailed_markdown_results(coverage_detailed_results:)
     text_results = <<~TEXT
+      ## Failed because the following files were below the minimum coverage
       | % | File |
       | ---- | -------- |
     TEXT
-    # TODO: order by worst offenders
+
     coverage_detailed_results.each do |result|
       text_results += "| #{result["covered_percent"].round(2)} | #{result["filename"].split("/").last(3).join("/")} |\n"
     end
@@ -78,6 +79,14 @@ class CheckAction
       build_detailed_markdown_results(coverage_detailed_results: coverage_detailed_results)
     else
       "Nothing to show"
+    end
+  end
+
+  def build_output_title(coverage_results:, coverage_detailed_results:)
+    if coverage_detailed_results.enabled? && !coverage_detailed_results.passed?
+      "#{coverage_detailed_results.total_files_failing_coverage} file(s) below minimum #{@minimum_coverage}% coverage"
+    else
+      "#{coverage_results.covered_percent}% covered (minimum #{@minimum_coverage}%)"
     end
   end
 
@@ -96,7 +105,7 @@ class CheckAction
       completed_at: Time.now.iso8601,
       conclusion: conclusion,
       output: {
-        title: "#{coverage_results.covered_percent}% covered (minimum #{@minimum_coverage}%)",
+        title: build_output_title(coverage_results: coverage_results, coverage_detailed_results: coverage_detailed_results),
         summary: summary,
         text: build_output_text(coverage_detailed_results: coverage_detailed_results),
         annotations: []

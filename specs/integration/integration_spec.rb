@@ -91,7 +91,7 @@ describe "Check Action integration" do
           mock_time = instance_double(Time)
           expect(Time).to receive(:now).and_return(mock_time).twice
           expect(mock_time).to receive(:iso8601).and_return(the_time).twice
-          minimum_coverage = 80
+          minimum_coverage = 49 # 50 is lowest in fake file
 
           stub_request(:post, "https://api.github.com/repos/#{repo}/check-runs")
             .with(body: { name: "SimpleCov", head_sha: sha, status: "in_progress", started_at: the_time })
@@ -117,12 +117,15 @@ describe "Check Action integration" do
           mock_time = instance_double(Time)
           expect(Time).to receive(:now).and_return(mock_time).twice
           expect(mock_time).to receive(:iso8601).and_return(the_time).twice
-          minimum_coverage = 95
-          passing_markdown_text = <<~TEXT
+          minimum_coverage = 99
+          failing_markdown_text = <<~TEXT
+            ## Failed because the following files were below the minimum coverage
             | % | File |
             | ---- | -------- |
-            | 92.0 | lib/coverage/request.rb |
+            | 50.0 | lib/coverage/check_action.rb |
             | 88.89 | lib/coverage/retrieve_commit_sha.rb |
+            | 92.0 | lib/coverage/request.rb |
+            | 98.0 | lib/coverage/last_run_results.rb |
           TEXT
 
           stub_request(:post, "https://api.github.com/repos/#{repo}/check-runs")
@@ -130,7 +133,7 @@ describe "Check Action integration" do
             .to_return(body: { id: check_run_id }.to_json, status: 201)
 
           stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
-            .with(body: { name: "SimpleCov", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "97.77% covered (minimum #{minimum_coverage}%)", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum (by line)\n", text: passing_markdown_text, annotations: [] } })
+            .with(body: { name: "SimpleCov", head_sha: sha, status: "completed", completed_at: the_time, conclusion: "failure", output: { title: "4 file(s) below minimum #{minimum_coverage}% coverage", summary: "* 97.77% covered\n" + "* #{minimum_coverage}% minimum (by line)\n", text: failing_markdown_text, annotations: [] } })
 
           ClimateControl.modify GITHUB_EVENT_PATH: "specs/fakes/fake_github_event_path_push.json", GITHUB_SHA: sha do
             CheckAction.new(

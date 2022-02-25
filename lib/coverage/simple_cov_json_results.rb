@@ -23,9 +23,15 @@ class SimpleCovJsonResults
   end
 
   def each
-    @failing_coverage.each do |result|
+    @failing_coverage.sort_by do |coverage|
+      coverage["covered_percent"]
+    end.each do |result|
       yield(result)
     end
+  end
+
+  def total_files_failing_coverage
+    @failing_coverage.size
   end
 
   private

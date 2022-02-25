@@ -5,7 +5,7 @@
     [
         {
             "filename": "/home/username/simplecov-check-action/lib/coverage/check_action.rb",
-            "covered_percent": 100.0,
+            "covered_percent": 50.0,
             "coverage":
             {
                 "lines":
@@ -96,7 +96,7 @@
         },
         {
             "filename": "/home/username/simplecov-check-action/lib/coverage/last_run_results.rb",
-            "covered_percent": 100.0,
+            "covered_percent": 98.0,
             "coverage":
             {
                 "lines":
