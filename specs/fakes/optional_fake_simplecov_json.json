@@ -1,0 +1,309 @@
+{
+    "timestamp": 1645802494,
+    "command_name": "RSpec",
+    "files":
+    [
+        {
+            "filename": "/home/username/simplecov-check-action/lib/coverage/check_action.rb",
+            "covered_percent": 100.0,
+            "coverage":
+            {
+                "lines":
+                [
+                    null,
+                    null,
+                    1,
+                    1,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    null,
+                    null,
+                    1,
+                    8,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    6,
+                    6,
+                    null,
+                    6,
+                    null,
+                    null,
+                    6,
+                    null,
+                    null,
+                    1,
+                    12,
+                    null,
+                    null,
+                    1,
+                    null,
+                    6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    1,
+                    6,
+                    6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                "branches":
+                {
+                    "[:if, 0, 45, 17, 45, 65]":
+                    {
+                        "[:then, 1, 45, 44, 45, 53]": 3,
+                        "[:else, 2, 45, 56, 45, 65]": 3
+                    }
+                }
+            },
+            "covered_strength": 5.666666666666667,
+            "covered_lines": 24,
+            "lines_of_code": 24
+        },
+        {
+            "filename": "/home/username/simplecov-check-action/lib/coverage/last_run_results.rb",
+            "covered_percent": 100.0,
+            "coverage":
+            {
+                "lines":
+                [
+                    null,
+                    null,
+                    null,
+                    1,
+                    1,
+                    8,
+                    8,
+                    8,
+                    null,
+                    8,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    1,
+                    6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    1,
+                    18,
+                    null,
+                    null,
+                    1,
+                    null,
+                    1,
+                    34,
+                    null,
+                    null,
+                    1,
+                    12,
+                    null,
+                    null,
+                    1,
+                    6,
+                    null,
+                    null
+                ],
+                "branches":
+                {
+                    "[:unless, 0, 10, 4, 10, 135]":
+                    {
+                        "[:else, 1, 10, 4, 10, 135]": 6,
+                        "[:then, 2, 10, 4, 10, 76]": 2
+                    },
+                    "[:if, 3, 24, 4, 24, 70]":
+                    {
+                        "[:then, 4, 24, 39, 24, 52]": 12,
+                        "[:else, 5, 24, 55, 24, 70]": 6
+                    }
+                }
+            },
+            "covered_strength": 6.823529411764706,
+            "covered_lines": 17,
+            "lines_of_code": 17
+        },
+        {
+            "filename": "/home/username/simplecov-check-action/lib/coverage/request.rb",
+            "covered_percent": 92.0,
+            "coverage":
+            {
+                "lines":
+                [
+                    null,
+                    null,
+                    1,
+                    null,
+                    1,
+                    1,
+                    6,
+                    6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    1,
+                    6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    1,
+                    6,
+                    null,
+                    null,
+                    1,
+                    null,
+                    1,
+                    12,
+                    12,
+                    12,
+                    12,
+                    12,
+                    12,
+                    null,
+                    12,
+                    null,
+                    null,
+                    12,
+                    12,
+                    null,
+                    null,
+                    12,
+                    0,
+                    null,
+                    null,
+                    12,
+                    0,
+                    null,
+                    null,
+                    12,
+                    null,
+                    null
+                ],
+                "branches":
+                {
+                    "[:if, 0, 46, 4, 48, 7]":
+                    {
+                        "[:then, 1, 47, 6, 47, 51]": 0,
+                        "[:else, 2, 46, 4, 48, 7]": 12
+                    },
+                    "[:if, 3, 50, 4, 52, 7]":
+                    {
+                        "[:then, 4, 51, 6, 51, 58]": 0,
+                        "[:else, 5, 50, 4, 52, 7]": 12
+                    }
+                }
+            },
+            "covered_strength": 7.0,
+            "covered_lines": 23,
+            "lines_of_code": 25
+        },
+        {
+            "filename": "/home/username/simplecov-check-action/lib/coverage/retrieve_commit_sha.rb",
+            "covered_percent": 88.88888888888889,
+            "coverage":
+            {
+                "lines":
+                [
+                    null,
+                    null,
+                    1,
+                    null,
+                    null,
+                    null,
+                    1,
+                    4,
+                    4,
+                    null,
+                    4,
+                    null,
+                    4,
+                    null,
+                    null,
+                    1,
+                    null,
+                    1,
+                    0,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                "branches":
+                {
+                    "[:if, 0, 11, 4, 11, 65]":
+                    {
+                        "[:then, 1, 11, 4, 11, 43]": 0,
+                        "[:else, 2, 11, 4, 11, 65]": 4
+                    },
+                    "[:if, 3, 13, 4, 13, 64]":
+                    {
+                        "[:then, 4, 13, 28, 13, 45]": 2,
+                        "[:else, 5, 13, 48, 13, 64]": 2
+                    }
+                }
+            },
+            "covered_strength": 2.2222222222222223,
+            "covered_lines": 8,
+            "lines_of_code": 9
+        }
+    ],
+    "metrics":
+    {
+        "covered_percent": 96.0,
+        "covered_strength": 5.96,
+        "covered_lines": 72,
+        "total_lines": 75
+    }
+}

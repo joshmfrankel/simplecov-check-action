@@ -8,10 +8,20 @@ class Request
     @debug = debug
   end
 
+  # Make HTTP Patch request
+  # @param uri: [String|URI] The endpoint to make the request at
+  # @param body: [Hash] The payload to send to the endpoint
+  #
+  # @return [Net::HTTPResponse]
   def post(uri:, body:)
     run(method: Net::HTTP::Post, uri: uri, body: body)
   end
 
+  # Make HTTP Patch request
+  # @param uri: [String|URI] The endpoint to make the request at
+  # @param body: [Hash] The payload to send to the endpoint
+  #
+  # @return [Net::HTTPResponse]
   def patch(uri:, body:)
     run(method: Net::HTTP::Patch, uri: uri, body: body)
   end
@@ -24,7 +34,7 @@ class Request
       request["Content-Type"] = "application/json"
       request["Accept"] = "application/vnd.github.antiope-preview+json"
       request["Authorization"] = "Bearer #{@access_token}"
-      request["User-Agent"] = "ruby"
+      request["User-Agent"] = "Github Action"
 
       request.body = body.to_json
     end

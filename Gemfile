@@ -10,5 +10,8 @@ group :test do
   gem "rspec"
   gem "webmock"
   gem "simplecov"
+  gem "climate_control"
+
+  # Optional for more robust reporting
   gem "simplecov-json"
 end
