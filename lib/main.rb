@@ -15,6 +15,20 @@ pull_request_sha = json.dig("pull_request", "head", "sha")
 # we utilize the event data provided by Github to retrieve the pull requests sha.
 sha = pull_request_sha.nil? ? ENV["GITHUB_SHA"] : pull_request_sha
 
+if ENV["INPUT_DEBUG"]
+  puts <<~SHA_DEBUG
+    === START SHA DEBUG ===
+    #{json}
+    =======================
+    #{pull_request_sha}
+    =======================
+    #{ENV["GITHUB_SHA"]}
+    =======================
+    #{sha}
+    === END SHA DEBUG ===
+  SHA_DEBUG
+end
+
 CheckAction.new(
   # User-defined inputs
   coverage_path: ENV["INPUT_COVERAGE_PATH"],
