@@ -13,7 +13,7 @@ class RetrieveCommitSha
     pull_request_sha.nil? ? ENV["GITHUB_SHA"] : pull_request_sha
   end
 
-  private
+  private_class_method
 
   def self.print_debug_log(json, pull_request_sha)
     $stdout.puts <<~SHA_DEBUG

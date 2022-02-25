@@ -6,8 +6,11 @@ require "time"
 require_relative "./coverage/request"
 require_relative "./coverage/retrieve_commit_sha"
 require_relative "./coverage/check_action"
-require_relative "./coverage/last_run_results"
-require_relative "./coverage/simple_cov_json_results"
+require_relative "./coverage/adapters/simple_cov_result"
+require_relative "./coverage/adapters/simple_cov_json_result"
+require_relative "./coverage/adapters/github_end_check_payload"
+require_relative "./coverage/formatters/start_check_run"
+require_relative "./coverage/formatters/end_check_run"
 
 CheckAction.new(
   # User-defined inputs
