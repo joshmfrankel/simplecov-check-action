@@ -23,3 +23,6 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+branding:
+  icon: 'check-circle'
+  color: 'gray-dark'
