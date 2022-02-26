@@ -20,10 +20,10 @@ Assuming you've followed the guide above (you have the gem in your Gemfile and h
 ## Sample Output
 
 **Github PR Check UI**
-![img/simple-cov-check-basic.png]
+![Github PR Check UI](img/simple-cov-check-basic.png)
 
 **Github Detailed Check UI**
-![img/simple-cov-check-basic-detailed.png]
+![Github Detailed Check UI](img/simple-cov-check-basic-detailed.png)
 
 ## Configuration Options
 See [https://github.com/joshmfrankel/simplecov-check-action/blob/main/action.yml](https://github.com/joshmfrankel/simplecov-check-action/blob/main/action.yml) for all available options and their defaults.
@@ -52,7 +52,7 @@ Now instead of checking overall test suite coverage, the Github Action will ensu
 ## Sample Output
 
 **Github PR Check UI**
-![img/simple-cov-check-advanced.png]
+![Github PR Check UI](img/simple-cov-check-advanced.png)
 
 **Github Detailed Check UI**
-![img/simple-cov-check-advanced-detailed.png]
+![Github Detailed Check UI](img/simple-cov-check-advanced-detailed.png)
