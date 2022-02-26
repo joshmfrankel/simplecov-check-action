@@ -47,3 +47,10 @@ end
 ```
 
 Now instead of checking overall test suite coverage, the Github Action will ensure that individual files have higher coverage than the minimum. This is essentially a reproduction of the built-in minimum_coverage_by_file option of SimpleCov albeit at the Github Action level. See [minimum_coverage_by_file](https://github.com/simplecov-ruby/simplecov#minimum-coverage-by-file)
+
+## Example configuration
+
+Still struggling to set this up? `simplecov-check-action` utilizes itself within a Github workflow. You can view the workflow and the spec_helper files for a good example of how to configure this check.
+
+[Example Github Workflow](/.github/workflows/testing.yml)
+[Example Spec Helper SimpleCov Setup](/specs/spec_helper.rb)
