@@ -1,4 +1,4 @@
-name: 'SimpleCov Check Action'
+name: 'SimpleCov+ Action'
 description: 'Enabling SimpleCov support for Github Actions'
 author: 'Josh Frankel'
 inputs:
