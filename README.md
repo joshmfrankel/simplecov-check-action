@@ -30,9 +30,11 @@ See [https://github.com/joshmfrankel/simplecov-check-action/blob/main/action.yml
 Most useful is the **minimum_coverage** option as it allows specification as to the value at which a failure result should be produced.
 
 ## Advanced Installation
-If you also configure the simplecov-json gem there are some additional benefits. See [Usage](https://github.com/vicentllongo/simplecov-json#usage) for simplecov-json.
+The advanced installation switches the coverage failing mode from **overall test coverage** to **per file coverage**. This is similiar to the `minimum_coverage_by_file` option that SimpleCov provides. See [minimum_coverage_by_file](https://github.com/simplecov-ruby/simplecov#minimum-coverage-by-file)
 
-Note: You'll need to setup both the standard formatter as well as json formatter within your test_helper.rb
+In order to activate advanced mode, you'll need to configure the simplecov-json gem. See [Usage](https://github.com/vicentllongo/simplecov-json#usage) for simplecov-json.
+
+You'll need to setup both the standard formatter as well as json formatter within your test_helper.rb. Example below:
 
 ```ruby
 require "simplecov"
@@ -46,11 +48,14 @@ SimpleCov.start do
 end
 ```
 
-Now instead of checking overall test suite coverage, the Github Action will ensure that individual files have higher coverage than the minimum. This is essentially a reproduction of the built-in minimum_coverage_by_file option of SimpleCov albeit at the Github Action level. See [minimum_coverage_by_file](https://github.com/simplecov-ruby/simplecov#minimum-coverage-by-file)
+One large benefit to this approach is that your code coverage minimum threshold is less skewed by outlier results. Said best by the SimpleCov documentation:
+
+> You can define the minimum coverage by file percentage expected... This is useful to help ensure coverage is relatively consistent, rather than being skewed by particularly good or bad areas of the code.
 
 ## Example configuration
 
 Still struggling to set this up? `simplecov-check-action` utilizes itself within a Github workflow. You can view the workflow and the spec_helper files for a good example of how to configure this check.
 
 [Example Github Workflow](/.github/workflows/testing.yml)
+
 [Example Spec Helper SimpleCov Setup](/specs/spec_helper.rb)
