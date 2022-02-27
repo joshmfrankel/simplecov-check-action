@@ -1,4 +1,4 @@
-# SimpleCov Github Check Action
+# SimpleCov+ Action
 
 A Github check action which displays failing test coverage from SimpleCov while providing the option
 to fail a build based on minimum coverage threshold.
@@ -8,7 +8,7 @@ to fail a build based on minimum coverage threshold.
 Want to see more examples of this check in action? :wink: See [screenshots.md](/screenshots.md)
 
 ## Basic Installation
-In order for simplecov-check-action to function properly, you first need the simplecov gem. See [Getting Started](https://github.com/simplecov-ruby/simplecov#getting-started).
+In order for SimpleCov+ Action to function properly, you first need the simplecov gem. See [Getting Started](https://github.com/simplecov-ruby/simplecov#getting-started).
 
 Assuming you've followed the guide above (you have the gem in your Gemfile and have properly setup test_helper.rb), then the only other step is to utilize the Github action within your workflow.
 
@@ -54,7 +54,7 @@ One large benefit to this approach is that your code coverage minimum threshold 
 
 ## Example configuration
 
-Still struggling to set this up? `simplecov-check-action` utilizes itself within a Github workflow. You can view the workflow and the spec_helper files for a good example of how to configure this check.
+Still struggling to set this up? SimpleCov+ Action utilizes itself within a Github workflow. You can view the workflow and the spec_helper files for a good example of how to configure this check.
 
 [Example Github Workflow](/.github/workflows/testing.yml)
 
