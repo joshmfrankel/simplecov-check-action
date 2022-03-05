@@ -59,3 +59,41 @@ Still struggling to set this up? SimpleCov+ Action utilizes itself within a Gith
 [Example Github Workflow](/.github/workflows/testing.yml)
 
 [Example Spec Helper SimpleCov Setup](/specs/spec_helper.rb)
+
+## FAQs
+
+First off there is a `debug` option which prints many of the API calls made to Github. This can be helpful for diagnosing faults in SimpleCov+ Action.
+
+### My Code Coverage isn't accurate for Rails parallelize 
+
+Use the following configuration within your test_helper.rb or spec_helper.rb:
+
+```ruby
+
+# inside test_helper.rb or spec_helper.rb
+class ActiveSupport::TestCase
+  parallelize(workers: :number_of_processors)
+
+  parallelize_setup do |worker|
+    SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"
+  end
+
+  parallelize_teardown do
+    SimpleCov.result
+  end
+end
+```
+
+Additionally, make sure that your test environment is eager loading your application. This ensures that SimpleCov picks up coverage for all files accurately.
+
+```ruby
+# config/environments/test.rb
+Rails.application.configure do
+  # many more configs...
+  
+  # Note: ENV["CI"] is set to true by default from Github in the testing environment
+  config.eager_load = ENV["CI"].present?
+  
+  # some more configs...
+end
+```
