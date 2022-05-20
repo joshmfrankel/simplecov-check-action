@@ -29,5 +29,6 @@ jobs:
       # Using the current repo to perform coverage analysis
       - uses: joshmfrankel/simplecov-check-action@main
         with:
-          minimum_coverage: 85
+          minimum_suite_coverage: 85
+          minimum_file_coverage: 70
           github_token: ${{ secrets.GITHUB_TOKEN }}

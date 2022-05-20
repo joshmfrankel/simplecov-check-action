@@ -2,22 +2,14 @@
 
 module Formatters
   class StartCheckRun
-    GITHUB_CHECK_NAME = "SimpleCov"
-    GITHUB_API_URL = "https://api.github.com/repos"
-
-    def initialize(repo:, sha:)
-      @repo = repo
-      @sha = sha
+    def self.as_uri
+      "#{Configuration.github_api_url}/#{Configuration.github_repo}/check-runs"
     end
 
-    def as_uri
-      "#{GITHUB_API_URL}/#{@repo}/check-runs"
-    end
-
-    def as_payload
+    def self.as_payload
       {
-        name: GITHUB_CHECK_NAME,
-        head_sha: @sha,
+        name: Configuration.check_job_name,
+        head_sha: Configuration.github_sha,
         status: "in_progress",
         started_at: Time.now.iso8601
       }

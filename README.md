@@ -64,6 +64,13 @@ Still struggling to set this up? SimpleCov+ Action utilizes itself within a Gith
 
 First off there is a `debug` option which prints many of the API calls made to Github. This can be helpful for diagnosing faults in SimpleCov+ Action.
 
+### I don't want to fail coverage on a per-file basis
+
+If you've configured SimpleCov-json then SimpleCov+ Action will automatically
+fail CI when any file is below the minimum file coverage. This can be disabled if
+you want to utilize SimpleCov-json but don't want SimpleCov+ Action to fail by
+setting `minimum_file_coverage` to 0.
+
 ### My Code Coverage isn't accurate for Rails parallelize 
 
 Use the following configuration within your test_helper.rb or spec_helper.rb:

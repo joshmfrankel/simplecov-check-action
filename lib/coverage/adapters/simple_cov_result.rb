@@ -3,14 +3,13 @@
 # Value object to wrap SimpleCov .last_run.json
 module Adapters
   class SimpleCovResult
-    attr_reader :minimum_coverage, :minimum_coverage_type
+    attr_reader :minimum_coverage
 
-    def initialize(coverage_path:, minimum_coverage:, minimum_coverage_type:)
+    def initialize(coverage_path:, minimum_coverage:)
       @results = JSON.parse(File.read(coverage_path))
       @minimum_coverage = Float(minimum_coverage)
-      @minimum_coverage_type = minimum_coverage_type
 
-      raise "#{coverage_path} does not contain `#{minimum_coverage_type}` key" unless !result.nil? && result.key?(@minimum_coverage_type)
+      raise "#{coverage_path} does not contain `line` key" unless !result.nil? && result.key?("line")
     end
 
     # Determine pass/fail response for SimpleCov
@@ -24,21 +23,13 @@ module Adapters
     #
     # @return [Float]
     def covered_percent
-      @minimum_coverage_type == "line" ? line_coverage : branch_coverage
+      result["line"]
     end
 
     private
 
     def result
       @_result ||= @results["result"]
-    end
-
-    def line_coverage
-      result["line"]
-    end
-
-    def branch_coverage
-      result["branch"]
     end
   end
 end
