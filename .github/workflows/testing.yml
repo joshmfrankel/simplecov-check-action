@@ -27,7 +27,7 @@ jobs:
           bundle exec rspec specs/
 
       # Using the current repo to perform coverage analysis
-      - uses: joshmfrankel/simplecov-check-action@main
+      - uses: joshmfrankel/simplecov-check-action@joshmfrankel/refactor-fails-on-coverage-type
         with:
           minimum_coverage: 85
           github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -8,7 +8,10 @@ class RetrieveCommitSha
     json = JSON.parse(File.read(ENV["GITHUB_EVENT_PATH"]))
     pull_request_sha = json.dig("pull_request", "head", "sha")
 
-    print_debug_log(json, pull_request_sha) if ENV["INPUT_DEBUG"]
+    $stdout.puts ENV["INPUT_DEBUG"]
+    $stdout.puts "-----"
+
+    print_debug_log(json, pull_request_sha) if ENV["INPUT_DEBUG"] == true
 
     pull_request_sha.nil? ? ENV["GITHUB_SHA"] : pull_request_sha
   end
