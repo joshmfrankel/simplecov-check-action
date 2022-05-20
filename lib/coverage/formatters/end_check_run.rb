@@ -2,24 +2,19 @@
 
 module Formatters
   class EndCheckRun
-    GITHUB_CHECK_NAME = "SimpleCov"
-    GITHUB_API_URL = "https://api.github.com/repos"
-
-    def initialize(repo:, sha:, check_id:, payload_adapter:)
-      @repo = repo
-      @sha = sha
+    def initialize(check_id:, payload_adapter:)
       @check_id = check_id
       @payload_adapter = payload_adapter
     end
 
     def as_uri
-      "#{GITHUB_API_URL}/#{@repo}/check-runs/#{@check_id}"
+      "#{Configuration.github_api_url}/#{Configuration.github_repo}/check-runs/#{@check_id}"
     end
 
     def as_payload
       {
-        name: GITHUB_CHECK_NAME,
-        head_sha: @sha,
+        name: Configuration.check_job_name,
+        head_sha: Configuration.github_sha,
         status: "completed",
         completed_at: Time.now.iso8601,
         conclusion: @payload_adapter.conclusion,

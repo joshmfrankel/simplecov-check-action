@@ -8,8 +8,8 @@ module Adapters
     end
 
     def conclusion
-      if @coverage_detailed_results.enabled?
-        @coverage_detailed_results.passed? ? "success" : "failure"
+      if @coverage_detailed_results.enabled? && !@coverage_detailed_results.passed?
+        "failure"
       else
         @coverage_results.passed? ? "success" : "failure"
       end
@@ -17,16 +17,21 @@ module Adapters
 
     def title
       if @coverage_detailed_results.enabled? && !@coverage_detailed_results.passed?
-        "#{@coverage_detailed_results.total_files_failing_coverage} file(s) below minimum #{@coverage_results.minimum_coverage}% coverage"
+        "#{@coverage_detailed_results.total_files_failing_coverage} file(s) below minimum #{@coverage_detailed_results.minimum_coverage}% coverage"
       else
         "#{@coverage_results.covered_percent}% covered (minimum #{@coverage_results.minimum_coverage}%)"
       end
     end
 
+    # TODO: removed (by #{@coverage_results.minimum_coverage_type})
     def summary
+      detailed_summary = ""
+      detailed_summary = "* #{@coverage_detailed_results.minimum_coverage} minimum coverage per file" if @coverage_detailed_results.enabled?
+
       <<~SUMMARY
         * #{@coverage_results.covered_percent}% covered
-        * #{@coverage_results.minimum_coverage}% minimum (by #{@coverage_results.minimum_coverage_type})
+        * #{@coverage_results.minimum_coverage}% minimum coverage for suite
+        #{detailed_summary}
       SUMMARY
     end
 
@@ -34,7 +39,7 @@ module Adapters
       if @coverage_detailed_results.enabled? && !@coverage_detailed_results.passed?
         build_detailed_markdown_results
       else
-        "Nothing to show"
+        "No details to show"
       end
     end
 

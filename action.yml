@@ -3,24 +3,24 @@ description: 'Enabling SimpleCov support for Github Actions'
 author: 'Josh Frankel'
 inputs:
   github_token:
-    description: "Github token for create checks"
+    description: 'Github token for create checks'
     required: true
-  minimum_coverage:
-    description: 'Average test suite percentage required to pass'
+  check_job_name:
+    description: "The name of the check's job"
+    default: 'SimpleCov'
+  minimum_suite_coverage:
+    description: 'Minimum test suite coverage percentage'
     default: 90
   minimum_file_coverage:
     description: 'Minimum coverage percent for every file (requres simplecov-json)'
     default: 70
   coverage_path:
     description: 'File path to coverage results'
-    default: "coverage/.last_run.json"
+    default: 'coverage/.last_run.json'
   coverage_json_path:
     description: 'File path to simplecov-json coverage results (only when using simplecov-json)'
-    default: "coverage/coverage.json"
-  minimum_coverage_type:
-    description: 'The type of coverage: line or branch'
-    default: "line"
-  debug:
+    default: 'coverage/coverage.json'
+  debug_mode:
     description: 'Display logs for debugging'
     default: false
 runs:

@@ -7,12 +7,21 @@
 #       coverage file is detected.
 module Adapters
   class SimpleCovJsonResult
-    attr_reader :failing_coverage
+    attr_reader :failing_coverage, :minimum_coverage
 
     def initialize(coverage_json_path:, minimum_coverage:)
       @coverage_json_path = coverage_json_path
       @minimum_coverage = Float(minimum_coverage)
       @failing_coverage = set_failing_coverage if enabled?
+
+      if Configuration.debug_mode? && !File.readable?(@coverage_json_path)
+        $stdout.puts <<~JSON
+          #{@coverage_json_path} was not a valid Simplecov-json output file.
+
+          Make sure that you have the gem in your Gemfile and have configured
+          your SimpleCov.formatters correctly in your test suite.
+        JSON
+      end
     end
 
     def enabled?
