@@ -61,7 +61,7 @@ describe "Check Action integration" do
             minimum_coverage: minimum_coverage,
             minimum_coverage_type: "line",
             github_token: github_token,
-            sha: RetrieveCommitSha.call,
+            sha: Utils::RetrieveCommitSha.call,
             repo: repo
           ).call
         end
@@ -87,7 +87,7 @@ describe "Check Action integration" do
             minimum_coverage: minimum_coverage,
             minimum_coverage_type: "line",
             github_token: github_token,
-            sha: RetrieveCommitSha.call,
+            sha: Utils::RetrieveCommitSha.call,
             repo: repo
           ).call
         end
@@ -114,7 +114,7 @@ describe "Check Action integration" do
               minimum_coverage: minimum_coverage,
               minimum_coverage_type: "line",
               github_token: github_token,
-              sha: RetrieveCommitSha.call,
+              sha: Utils::RetrieveCommitSha.call,
               repo: repo
             ).call
           end
@@ -149,7 +149,7 @@ describe "Check Action integration" do
               minimum_coverage: minimum_coverage,
               minimum_coverage_type: "line",
               github_token: github_token,
-              sha: RetrieveCommitSha.call,
+              sha: Utils::RetrieveCommitSha.call,
               repo: repo
             ).call
           end
@@ -178,7 +178,7 @@ describe "Check Action integration" do
             minimum_coverage: minimum_coverage,
             minimum_coverage_type: "line",
             github_token: github_token,
-            sha: RetrieveCommitSha.call,
+            sha: Utils::RetrieveCommitSha.call,
             repo: repo
           ).call
         end
@@ -204,7 +204,7 @@ describe "Check Action integration" do
             minimum_coverage: minimum_coverage,
             minimum_coverage_type: "line",
             github_token: github_token,
-            sha: RetrieveCommitSha.call,
+            sha: Utils::RetrieveCommitSha.call,
             repo: repo
           ).call
         end

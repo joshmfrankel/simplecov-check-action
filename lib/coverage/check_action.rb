@@ -16,7 +16,7 @@ class CheckAction
   def call
     # Create Check Run
     formatted_start_check = Formatters::StartCheckRun.new(repo: @repo, sha: @sha)
-    request_object = Request.new(access_token: @github_token, debug: @debug)
+    request_object = Utils::Request.new(access_token: @github_token, debug: @debug)
     request = request_object.post(uri: formatted_start_check.as_uri, body: formatted_start_check.as_payload)
 
     check_id = JSON.parse(request.body)["id"]
