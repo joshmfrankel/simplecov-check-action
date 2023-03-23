@@ -40,6 +40,6 @@ class Configuration
   end
 
   def self.github_api_url
-    ENV["GITHUB_API_URL"] || "https://api.github.com/repos"
+    ENV["GITHUB_API_URL"] || "https://api.github.com"
   end
 end

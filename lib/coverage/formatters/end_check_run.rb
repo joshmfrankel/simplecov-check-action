@@ -8,7 +8,7 @@ module Formatters
     end
 
     def as_uri
-      "#{Configuration.github_api_url}/#{Configuration.github_repo}/check-runs/#{@check_id}"
+      "#{Configuration.github_api_url}/repos/#{Configuration.github_repo}/check-runs/#{@check_id}"
     end
 
     def as_payload
