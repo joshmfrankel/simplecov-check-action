@@ -9,9 +9,9 @@ module Adapters
 
     def conclusion
       if @coverage_detailed_results.enabled? && !@coverage_detailed_results.passed?
-        "failure"
+        Configuration.on_fail_status
       else
-        @coverage_results.passed? ? "success" : "failure"
+        @coverage_results.passed? ? "success" : Configuration.on_fail_status
       end
     end
 
