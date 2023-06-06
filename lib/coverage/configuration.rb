@@ -19,6 +19,10 @@ class Configuration
     ENV["INPUT_MINIMUM_FILE_COVERAGE"]
   end
 
+  def self.on_fail_status
+    ENV["INPUT_ON_FAIL_STATUS"]
+  end
+
   def self.github_token
     ENV["INPUT_GITHUB_TOKEN"]
   end

@@ -11,6 +11,7 @@ on:
       - main
 jobs:
   rspec:
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
