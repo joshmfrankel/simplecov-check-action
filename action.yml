@@ -23,6 +23,9 @@ inputs:
   debug_mode:
     description: 'Display logs for debugging'
     default: false
+  on_fail_status:
+    description: 'The status to set when coverage fails. You might want neutral if you want things to be informative, for example.'
+    default: 'failure'
 runs:
   using: 'docker'
   image: 'Dockerfile'
