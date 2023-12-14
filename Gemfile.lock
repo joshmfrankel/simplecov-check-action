@@ -16,7 +16,7 @@ GEM
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
-    pry (0.14.1)
+    pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
     pry-nav (1.0.0)
@@ -66,6 +66,7 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -79,4 +80,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.3.5
+   2.4.18
