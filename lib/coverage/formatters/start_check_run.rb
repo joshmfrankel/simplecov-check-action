@@ -3,7 +3,7 @@
 module Formatters
   class StartCheckRun
     def self.as_uri
-      "#{Configuration.github_api_url}/#{Configuration.github_repo}/check-runs"
+      "#{Configuration.github_repo_api_url}/#{Configuration.github_repo}/check-runs"
     end
 
     def self.as_payload

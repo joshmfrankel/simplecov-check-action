@@ -43,7 +43,7 @@ class Configuration
     ENV["INPUT_CHECK_JOB_NAME"]
   end
 
-  def self.github_api_url
-    "https://api.github.com/repos"
+  def self.github_repo_api_url
+    ENV["INPUT_GITHUB_REPO_API_URL"]
   end
 end
