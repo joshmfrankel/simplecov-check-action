@@ -8,7 +8,7 @@ module Adapters
     def covered_percentage
       return 0 if group_files.count.zero?
 
-       total_percetage = group_files.map { |f| f['covered_percentage'] }.sum
+      total_percetage = group_files.map { |f| f['covered_percent'] }.sum
       (total_percetage / group_files.count) * 100
     end
 
