@@ -2,6 +2,10 @@
 
 # Provides simple interface for all configuration and environmental settings
 class Configuration
+  def self.coverage_group
+    ENV["INPUT_COVERAGE_GROUP"]
+  end
+
   def self.coverage_path
     ENV["INPUT_COVERAGE_PATH"]
   end

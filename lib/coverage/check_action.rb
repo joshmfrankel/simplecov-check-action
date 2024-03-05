@@ -12,7 +12,8 @@ class CheckAction
     # Build End Payload Adapater
     coverage_results = Adapters::SimpleCovResult.new(
       coverage_path: Configuration.coverage_path,
-      minimum_coverage: Configuration.minimum_suite_coverage
+      minimum_coverage: Configuration.minimum_suite_coverage,
+      coverage_group: Configuration.coverage_group
     )
     coverage_detailed_results = Adapters::SimpleCovJsonResult.new(
       coverage_json_path: Configuration.coverage_json_path,
