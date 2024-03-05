@@ -6,14 +6,16 @@ module Adapters
     end
 
     def covered_percentage
-      total_percetage = group_files.map { |f| f['covered_percentage'] }.sum
+      return 0 if group_files.count.zero?
+
+       total_percetage = group_files.map { |f| f['covered_percentage'] }.sum
       (total_percetage / group_files.count) * 100
     end
 
 
     def group_files
       files.select do |file|
-        files["filename"].match(/#{@group}/)
+        file["filename"].match?(@group)
       end
     end
 
