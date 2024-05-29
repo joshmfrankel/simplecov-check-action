@@ -26,6 +26,9 @@ inputs:
   on_fail_status:
     description: 'The status to set when coverage fails. You might want neutral if you want things to be informative, for example.'
     default: 'failure'
+  github_repo_api_url:
+    description: 'The github repo api url'
+    default: 'https://api.github.com/repos'
 runs:
   using: 'docker'
   image: 'Dockerfile'
