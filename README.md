@@ -71,7 +71,7 @@ fail CI when any file is below the minimum file coverage. This can be disabled i
 you want to utilize SimpleCov-json but don't want SimpleCov+ Action to fail by
 setting `minimum_file_coverage` to 0.
 
-### My Code Coverage isn't accurate for Rails parallelize 
+### My Code Coverage isn't accurate for Rails parallelize
 
 Use the following configuration within your test_helper.rb or spec_helper.rb:
 
@@ -97,10 +97,19 @@ Additionally, make sure that your test environment is eager loading your applica
 # config/environments/test.rb
 Rails.application.configure do
   # many more configs...
-  
+
   # Note: ENV["CI"] is set to true by default from Github in the testing environment
   config.eager_load = ENV["CI"].present?
-  
+
   # some more configs...
 end
+```
+
+## Development Setup
+
+```bash
+git clone git@github.com:joshmfrankel/simplecov-check-action.git
+cd simplecov-check-action
+bundle install
+bundle exec rspec spec
 ```
