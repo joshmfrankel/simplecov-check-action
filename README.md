@@ -104,3 +104,13 @@ Rails.application.configure do
   # some more configs...
 end
 ```
+
+
+## Development Setup
+
+```bash
+git clone git@github.com:joshmfrankel/simplecov-check-action.git
+cd simplecov-check-action
+bundle install
+bundle exec rspec specs
+```
