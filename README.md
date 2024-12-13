@@ -27,7 +27,7 @@ Assuming you've followed the guide above (you have the gem in your Gemfile and h
 ## Configuration Options
 See [https://github.com/joshmfrankel/simplecov-check-action/blob/main/action.yml](https://github.com/joshmfrankel/simplecov-check-action/blob/main/action.yml) for all available options and their defaults.
 
-Most useful is the **minimum_coverage** option as it allows specification as to the value at which a failure result should be produced.
+Most useful is the **minimum_suite_coverage** option as it allows specification as to the value at which a failure result should be produced.
 
 ## Advanced Installation
 The advanced installation switches the coverage failing mode from **overall test coverage** to **per file coverage**. This is similiar to the `minimum_coverage_by_file` option that SimpleCov provides. See [minimum_coverage_by_file](https://github.com/simplecov-ruby/simplecov#minimum-coverage-by-file)
@@ -103,4 +103,14 @@ Rails.application.configure do
   
   # some more configs...
 end
+```
+
+
+## Development Setup
+
+```bash
+git clone git@github.com:joshmfrankel/simplecov-check-action.git
+cd simplecov-check-action
+bundle install
+bundle exec rspec specs
 ```
