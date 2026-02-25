@@ -44,8 +44,6 @@ class Configuration
   end
 
   def self.github_api_url
-    api_url = ENV.fetch("GITHUB_API_URL", "https://api.github.com")
-
-    "#{api_url}/repos"
+    "https://api.github.com/repos"
   end
 end
