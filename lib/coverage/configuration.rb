@@ -20,7 +20,7 @@ class Configuration
   end
 
   def self.on_fail_status
-    ENV["INPUT_ON_FAIL_STATUS"]
+    ENV.fetch('INPUT_ON_FAIL_STATUS', 'failure')
   end
 
   def self.github_token
