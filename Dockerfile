@@ -1,4 +1,4 @@
-FROM ruby:3.1.0-alpine
+FROM ruby:3.4.2-alpine
 
 COPY lib /action/lib
 
