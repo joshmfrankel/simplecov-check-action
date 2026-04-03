@@ -9,10 +9,11 @@ describe 'Check Action integration' do
 
   # NOTE: This must match sha key in fake
   # @see specs/fakes/fake_github_event_path_pull_request.json
-  let(:pull_request_json_sha) { '3f2dc54bfec0b5295c6' }
-  let(:the_time) { '2022-02-21T09:51:57-05:00' }
-  let(:repo) { 'robswire/immersion' }
-  let(:passing_markdown_text) { 'No details to show' }
+  let(:pull_request_json_sha) { "3f2dc54bfec0b5295c6" }
+  let(:the_time) { "2022-02-21T09:51:57-05:00" }
+  let(:repo) { "robswire/immersion" }
+  let(:passing_markdown_text) { "No details to show" }
+  let(:on_fail_status) { "failure" }
 
   context 'for coverage type line' do
     context 'for Pushes' do
@@ -66,7 +67,8 @@ describe 'Check Action integration' do
           INPUT_COVERAGE_JSON_PATH: 'specs/fakes/xx_not_a_file.json',
           INPUT_MINIMUM_SUITE_COVERAGE: minimum_coverage,
           INPUT_MINIMUM_FILE_COVERAGE: minimum_coverage,
-          INPUT_GITHUB_TOKEN: github_token
+          INPUT_GITHUB_TOKEN: github_token,
+          INPUT_ON_FAIL_STATUS: on_fail_status
         ) do
           CheckAction.new.call
         end
@@ -196,7 +198,8 @@ describe 'Check Action integration' do
             INPUT_COVERAGE_JSON_PATH: 'specs/fakes/optional_fake_simplecov_json.json',
             INPUT_MINIMUM_SUITE_COVERAGE: minimum_suite_coverage,
             INPUT_MINIMUM_FILE_COVERAGE: minimum_file_coverage,
-            INPUT_GITHUB_TOKEN: github_token
+            INPUT_GITHUB_TOKEN: github_token,
+            INPUT_ON_FAIL_STATUS: on_fail_status
           ) do
             CheckAction.new.call
           end
@@ -226,7 +229,8 @@ describe 'Check Action integration' do
             INPUT_COVERAGE_JSON_PATH: 'specs/fakes/optional_fake_simplecov_json.json',
             INPUT_MINIMUM_SUITE_COVERAGE: minimum_suite_coverage,
             INPUT_MINIMUM_FILE_COVERAGE: minimum_file_coverage,
-            INPUT_GITHUB_TOKEN: github_token
+            INPUT_GITHUB_TOKEN: github_token,
+            INPUT_ON_FAIL_STATUS: on_fail_status
           ) do
             CheckAction.new.call
           end
@@ -259,7 +263,8 @@ describe 'Check Action integration' do
           INPUT_COVERAGE_JSON_PATH: 'specs/fakes/xx_not_a_file.json',
           INPUT_MINIMUM_SUITE_COVERAGE: minimum_coverage,
           INPUT_MINIMUM_FILE_COVERAGE: minimum_coverage,
-          INPUT_GITHUB_TOKEN: github_token
+          INPUT_GITHUB_TOKEN: github_token,
+          INPUT_ON_FAIL_STATUS: on_fail_status
         ) do
           CheckAction.new.call
         end
