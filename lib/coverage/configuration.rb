@@ -3,20 +3,20 @@
 # Provides simple interface for all configuration and environmental settings
 class Configuration
   def self.coverage_path
-    ENV["INPUT_COVERAGE_PATH"]
+    ENV.fetch('INPUT_COVERAGE_PATH', 'coverage/.last_run.json')
   end
 
   def self.coverage_json_path
-    ENV["INPUT_COVERAGE_JSON_PATH"]
+    ENV.fetch('INPUT_COVERAGE_JSON_PATH', 'coverage/coverage.json')
   end
 
   def self.minimum_suite_coverage
-    ENV["INPUT_MINIMUM_SUITE_COVERAGE"]
+    ENV.fetch('INPUT_MINIMUM_SUITE_COVERAGE', '90')
   end
 
   # Requires simplecov-json results
   def self.minimum_file_coverage
-    ENV["INPUT_MINIMUM_FILE_COVERAGE"]
+    ENV.fetch('INPUT_MINIMUM_FILE_COVERAGE', '70')
   end
 
   def self.on_fail_status
@@ -24,11 +24,11 @@ class Configuration
   end
 
   def self.github_token
-    ENV["INPUT_GITHUB_TOKEN"]
+    ENV['INPUT_GITHUB_TOKEN']
   end
 
   def self.github_repo
-    ENV["GITHUB_REPOSITORY"]
+    ENV['GITHUB_REPOSITORY']
   end
 
   def self.github_sha
@@ -36,14 +36,14 @@ class Configuration
   end
 
   def self.debug_mode?
-    ENV["INPUT_DEBUG_MODE"] == "true"
+    ENV['INPUT_DEBUG_MODE'] == 'true'
   end
 
   def self.check_job_name
-    ENV["INPUT_CHECK_JOB_NAME"]
+    ENV.fetch('INPUT_CHECK_JOB_NAME', 'SimpleCov')
   end
 
   def self.github_repo_api_url
-    ENV.fetch("INPUT_GITHUB_REPO_API_URL", "https://api.github.com/repos")
+    ENV.fetch('INPUT_GITHUB_REPO_API_URL', 'https://api.github.com/repos')
   end
 end

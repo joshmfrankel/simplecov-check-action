@@ -54,8 +54,8 @@ describe 'Check Action integration' do
           .to_return(body: { id: check_run_id }.to_json, status: 201)
 
         stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
-          .with(body: { name: 'SimpleCov', head_sha: sha, status: 'completed', completed_at: the_time, conclusion: 'failure',
-                        output: { title: "97.77% covered (minimum #{minimum_coverage}.0%)", summary: "* 97.77% covered\n" + "* #{minimum_coverage}.0% minimum coverage for suite\n\n", text: passing_markdown_text, annotations: [] } })
+          .with(body: { name: 'SimpleCov', head_sha: sha, status: 'completed', completed_at: the_time,
+                        conclusion: 'failure', output: { title: "97.77% covered (minimum #{minimum_coverage}.0%)", summary: "* 97.77% covered\n" + "* #{minimum_coverage}.0% minimum coverage for suite\n\n", text: passing_markdown_text, annotations: [] } })
 
         ClimateControl.modify(
           GITHUB_EVENT_PATH: 'specs/fakes/fake_github_event_path_push.json',
