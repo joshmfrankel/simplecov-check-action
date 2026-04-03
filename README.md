@@ -114,3 +114,10 @@ cd simplecov-check-action
 bundle install
 bundle exec rspec specs
 ```
+
+# Contributing
+
+- Use the Pull Request template
+- Describe Why the change is necessary and what is included in the change
+- Include screenshots if necessary
+- PRs without description will be closed 😬
