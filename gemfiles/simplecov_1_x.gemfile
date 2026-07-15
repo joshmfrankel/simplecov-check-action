@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+ENV["SIMPLECOV_REQUIREMENT"] = "1.0.1"
+ENV["SIMPLECOV_JSON_FORMATTER"] = "false"
+
+eval_gemfile File.expand_path("../Gemfile", __dir__)

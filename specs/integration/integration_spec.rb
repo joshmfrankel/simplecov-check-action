@@ -131,7 +131,7 @@ describe 'Check Action integration' do
         ) do
           expect do
             CheckAction.new.call
-          end.to output(%r{specs/fakes/xx_not_a_file\.json was not a valid Simplecov-json output file.}).to_stdout
+          end.to output(%r{specs/fakes/xx_not_a_file\.json was not a readable SimpleCov coverage JSON file.}).to_stdout
         end
       end
 
@@ -229,6 +229,46 @@ describe 'Check Action integration' do
             INPUT_COVERAGE_JSON_PATH: 'specs/fakes/optional_fake_simplecov_json.json',
             INPUT_MINIMUM_SUITE_COVERAGE: minimum_suite_coverage,
             INPUT_MINIMUM_FILE_COVERAGE: minimum_file_coverage,
+            INPUT_GITHUB_TOKEN: github_token,
+            INPUT_ON_FAIL_STATUS: on_fail_status
+          ) do
+            CheckAction.new.call
+          end
+        end
+      end
+
+      context 'when native SimpleCov 1.x coverage file is present' do
+        it 'Fails when coverage is lower than the default file minimum and prints failing files' do
+          mock_time = instance_double(Time)
+          expect(Time).to receive(:now).and_return(mock_time).twice
+          expect(mock_time).to receive(:iso8601).and_return(the_time).twice
+          minimum_suite_coverage = '49'
+          failing_markdown_text = <<~TEXT
+            ### Failed because the following files were below the minimum coverage
+            | % | File |
+            | ---- | -------- |
+            | 50.0 | lib/coverage/check_action.rb |
+          TEXT
+
+          stub_request(:post, "https://api.github.com/repos/#{repo}/check-runs")
+            .with(body: { name: 'SimpleCov', head_sha: sha, status: 'in_progress', started_at: the_time })
+            .to_return(body: { id: check_run_id }.to_json, status: 201)
+
+          stub_request(:patch, "https://api.github.com/repos/#{repo}/check-runs/#{check_run_id}")
+            .with(body: { name: 'SimpleCov', head_sha: sha, status: 'completed', completed_at: the_time,
+                          conclusion: 'failure', output: { title: '1 file(s) below minimum 70.0% coverage',
+                                                          summary: "* 97.77% covered\n* #{minimum_suite_coverage}.0% minimum coverage for suite\n* 70.0 minimum coverage per file\n",
+                                                          text: failing_markdown_text, annotations: [] } })
+
+          ClimateControl.modify(
+            GITHUB_EVENT_PATH: 'specs/fakes/fake_github_event_path_push.json',
+            GITHUB_SHA: sha,
+            GITHUB_REPOSITORY: repo,
+            INPUT_CHECK_JOB_NAME: 'SimpleCov',
+            INPUT_COVERAGE_PATH: 'specs/fakes/fake_last_run.json',
+            INPUT_COVERAGE_JSON_PATH: 'specs/fakes/fake_simplecov_1_coverage.json',
+            INPUT_MINIMUM_SUITE_COVERAGE: minimum_suite_coverage,
+            INPUT_MINIMUM_FILE_COVERAGE: nil,
             INPUT_GITHUB_TOKEN: github_token,
             INPUT_ON_FAIL_STATUS: on_fail_status
           ) do
