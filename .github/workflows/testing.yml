@@ -1,5 +1,4 @@
-# We can dogfood the Github action but using it within our own Github action
-# for this repository
+# Dogfood the checked-out action against each generated SimpleCov report format.
 name: Testing
 
 on:
@@ -11,8 +10,19 @@ on:
       - main
 jobs:
   rspec:
+    name: RSpec (SimpleCov ${{ matrix.simplecov }})
     permissions: write-all
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - simplecov: '0.22'
+            gemfile: gemfiles/simplecov_0_22.gemfile
+          - simplecov: '1.0.1'
+            gemfile: gemfiles/simplecov_1_x.gemfile
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
     steps:
       - uses: actions/checkout@v2
@@ -20,7 +30,8 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          bundler: default
+          ruby-version: '3.4.2'
+          bundler: '4.0.3'
           bundler-cache: true
 
       - name: Run tests
@@ -28,8 +39,9 @@ jobs:
           bundle exec rspec specs/
 
       # Using the current repo to perform coverage analysis
-      - uses: joshmfrankel/simplecov-check-action@main
+      - uses: ./
         with:
+          check_job_name: SimpleCov ${{ matrix.simplecov }}
           minimum_suite_coverage: 85
           minimum_file_coverage: 70
           github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+ENV["SIMPLECOV_REQUIREMENT"] = "~> 0.22.0"
+
+eval_gemfile File.expand_path("../Gemfile", __dir__)

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/simplecov-ruby/simplecov/main/schemas/coverage-v1.0.schema.json",
+  "meta": {
+    "schema_version": "1.0",
+    "simplecov_version": "1.0.0",
+    "command_name": "RSpec",
+    "project_name": "simplecov-check-action",
+    "timestamp": "2026-07-15T12:00:00.000+02:00",
+    "root": "/home/username/simplecov-check-action",
+    "commit": null,
+    "primary_coverage": "line",
+    "line_coverage": true,
+    "branch_coverage": false,
+    "method_coverage": false
+  },
+  "total": {
+    "lines": {
+      "covered": 3,
+      "missed": 1,
+      "omitted": 0,
+      "total": 4,
+      "percent": 75.0,
+      "strength": 1.0
+    }
+  },
+  "coverage": {
+    "lib/coverage/check_action.rb": {
+      "lines": [1, 0],
+      "lines_covered_percent": 50.0,
+      "covered_lines": 1,
+      "missed_lines": 1,
+      "omitted_lines": 0,
+      "total_lines": 2
+    },
+    "lib/coverage/request.rb": {
+      "lines": [1, 1],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 2,
+      "missed_lines": 0,
+      "omitted_lines": 0,
+      "total_lines": 2
+    }
+  },
+  "groups": {},
+  "errors": {}
+}

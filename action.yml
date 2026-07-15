@@ -12,13 +12,13 @@ inputs:
     description: 'Minimum test suite coverage percentage'
     default: 90
   minimum_file_coverage:
-    description: 'Minimum coverage percent for every file (requres simplecov-json)'
+    description: 'Minimum line coverage percent for every file in a supported coverage JSON report'
     default: 70
   coverage_path:
     description: 'File path to coverage results'
     default: 'coverage/.last_run.json'
   coverage_json_path:
-    description: 'File path to simplecov-json coverage results (only when using simplecov-json)'
+    description: 'File path to native SimpleCov 1.x or simplecov-json coverage results'
     default: 'coverage/coverage.json'
   debug_mode:
     description: 'Display logs for debugging'
