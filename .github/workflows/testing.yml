@@ -1,4 +1,4 @@
-# Dogfood the checked-out action against each generated SimpleCov report format.
+# Test each supported report format and publish coverage analysis once.
 name: Testing
 
 on:
@@ -38,8 +38,10 @@ jobs:
         run: |
           bundle exec rspec specs/
 
-      # Using the current repo to perform coverage analysis
-      - uses: ./
+      # Use the native SimpleCov report to dogfood the checked-out action once.
+      - name: Analyze coverage
+        if: matrix.simplecov == '1.0.1'
+        uses: ./
         with:
           check_job_name: SimpleCov ${{ matrix.simplecov }}
           minimum_suite_coverage: 85
